@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_api/ui/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -8,6 +9,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final email = TextEditingController();
+  final firstName = TextEditingController();
+  final lastName = TextEditingController();
+  final password = TextEditingController();
+  var isSignedIn = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 keyboardType: TextInputType.emailAddress,
+                controller: email,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   labelStyle: TextStyle(fontFamily: 'Poppins'),
@@ -50,6 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     flex: 1,
                     child: TextFormField(
                       keyboardType: TextInputType.text,
+                      controller: firstName,
                       decoration: InputDecoration(
                         labelText: 'First Name',
                         labelStyle: TextStyle(
@@ -66,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     flex: 1,
                     child: TextFormField(
                       keyboardType: TextInputType.text,
+                      controller: lastName,
                       decoration: InputDecoration(
                         labelText: 'Last Name',
                         labelStyle: TextStyle(
@@ -87,6 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextFormField(
                 keyboardType: TextInputType.visiblePassword,
+                controller: password,
                 autocorrect: false,
                 enableSuggestions: false,
                 obscureText: true,
@@ -133,7 +144,56 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Expanded(
                     flex: 2,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (email.text.isEmpty ||
+                              firstName.text.isEmpty ||
+                              lastName.text.isEmpty ||
+                              password.text.isEmpty) {
+                            isSignedIn = false;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Please fill all fields.'),
+                              ),
+                            );
+                          } else if (!email.text.contains('@')) {
+                            isSignedIn = false;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Invalid email address.'),
+                              ),
+                            );
+                          } else if (password.text.length < 8) {
+                            isSignedIn = false;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Password must be at least 8 charaters'),
+                              ),
+                            );
+                          } else
+                            (isSignedIn = true);
+                        });
+
+                        if (
+                          email.text.isNotEmpty &&
+                          firstName.text.isNotEmpty &&
+                          lastName.text.isNotEmpty &&
+                          password.text.isNotEmpty
+                        ){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(
+                                username: email.text,
+                                password: password.text,
+                                firstname: firstName.text,
+                                lastName: lastName.text,
+                              )
+                              ),
+                          );
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                       ),
