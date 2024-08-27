@@ -172,27 +172,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             );
                           } else
-                            (isSignedIn = true);
+                            (
+                              isSignedIn = true,
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainScreen(
+                                        username: email.text,
+                                        password: password.text,
+                                        firstname: firstName.text,
+                                        lastName: lastName.text)),
+                              )
+                            );
                         });
 
-                        if (
-                          email.text.isNotEmpty &&
-                          firstName.text.isNotEmpty &&
-                          lastName.text.isNotEmpty &&
-                          password.text.isNotEmpty
-                        ){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MainScreen(
-                                username: email.text,
-                                password: password.text,
-                                firstname: firstName.text,
-                                lastName: lastName.text,
-                              )
-                              ),
-                          );
-                        }
+                        if (email.text.isNotEmpty &&
+                            firstName.text.isNotEmpty &&
+                            lastName.text.isNotEmpty &&
+                            password.text.isNotEmpty) ;
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
