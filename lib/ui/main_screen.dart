@@ -9,8 +9,7 @@ class MainScreen extends StatefulWidget {
       this.username,
       this.password,
       this.firstName,
-      this.lastName,
-      required String firstname});
+      this.lastName});
 
   final String? username;
   final String? password;

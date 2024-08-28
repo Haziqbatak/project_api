@@ -5,8 +5,6 @@ import 'package:project_api/ui/main_screen.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
-  
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -113,8 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(
                               builder: (context) => MainScreen(
                                   username: usernameController.text,
-                                  password: passwordController.text, firstname: '',
-                                  )
+                                  password: passwordController.text
+                              ),
                             ),
                             (route) => false,
                           );

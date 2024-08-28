@@ -57,8 +57,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Expanded(
                     flex: 1,
                     child: TextFormField(
-                      keyboardType: TextInputType.text,
                       controller: firstName,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         labelText: 'First Name',
                         labelStyle: TextStyle(
@@ -180,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     builder: (context) => MainScreen(
                                         username: email.text,
                                         password: password.text,
-                                        firstname: firstName.text,
+                                        firstName: firstName.text,
                                         lastName: lastName.text)),
                               )
                             );
