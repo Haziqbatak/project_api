@@ -15,7 +15,7 @@ class ApiService {
       List<dynamic> jsonResponse = jsonDecode(response.body);
       return jsonResponse.map((user) => Users.fromJson(user)).toList();
     } else {
-      print('Request Gagal dengan status : ${response.statusCode}.');
+      print('Request Gagal dengan status : ${response.statusCode}');
       return null;
     }
   }
