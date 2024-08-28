@@ -108,14 +108,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         if (usernameController.text.isNotEmpty &&
                             passwordController.text.isNotEmpty) {
-                          Navigator.push(
+                          Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (context) => MainScreen(
                                   username: usernameController.text,
                                   password: passwordController.text, firstname: '',
-                                  ),
+                                  )
                             ),
+                            (route) => false,
                           );
                         }
                       },

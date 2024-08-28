@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:project_api/model/users.dart';
 import 'package:project_api/service/api_service.dart';
 
@@ -62,16 +63,62 @@ class _MainScreenState extends State<MainScreen> {
                         child: Text('Users not found'),
                       );
                     } else {
-                      return InkWell(
-                        onTap: () {
-                          
-                        },
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ListView.builder(
-                            itemBuilder: (BuildContext context,int index) {},
-                            itemCount: snapshot.data!.length,
-                          ),
+                      return SizedBox(
+                        width: double.infinity,
+                        height: 300.0,
+                        child: ListView.builder(
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return GiffyDialog.image(
+                                      Image.network(
+                                        "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif",
+                                        height: 200,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      title: Text(
+                                        'Image Animation',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      content: Text(
+                                        'This is a image animation dialog box. This library helps you easily create fancy giffy dialog.',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'CANCEL'),
+                                          child: const Text('CANCEL'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'OK'),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      "${snapshot.data![index].name.toString()}",
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          itemCount: snapshot.data!.length,
                         ),
                       );
                     }
