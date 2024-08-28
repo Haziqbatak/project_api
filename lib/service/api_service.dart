@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   Future<List<Users>?> getUsers() async {
-    var url = Uri.parse('&{baseUrl}users');
+    var url = Uri.parse('${baseUrl}users');
     print(url);
 
     var response = await http.get(url);
