@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:project_api/model/photos.dart';
 import 'package:project_api/model/users.dart';
 import 'package:project_api/service/api_service.dart';
 import 'package:project_api/ui/detail_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen(
-      {super.key,
-      this.username,
-      this.password,
-      this.firstName,
-      this.lastName});
+      {super.key, this.username, this.password, this.firstName, this.lastName});
 
   final String? username;
   final String? password;
@@ -23,6 +20,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final Future<List<Users>?> users = ApiService().getUsers();
+  final Future<List<Photos>?> photos = ApiService().getPhotos();
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +101,10 @@ class _MainScreenState extends State<MainScreen> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                              DetailScreen(user: snapshot.data![index]),
-                                              ),
+                                                  DetailScreen(
+                                                      user: snapshot
+                                                          .data![index]),
+                                            ),
                                           ),
                                           child: Text(
                                             'Detail',

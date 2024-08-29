@@ -40,6 +40,10 @@ class Users {
         company: json["company"] == null ? null : Company.fromJson(json["company"]),
     );
 
+  get url => null;
+
+  get title => null;
+
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
