@@ -43,6 +43,17 @@ class _MainScreenState extends State<MainScreen> {
               style: TextStyle(
                   fontFamily: 'Poppins', fontSize: 18.0, letterSpacing: 2.0),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context, 
+                    '/photos'
+                    );
+                },
+                child: Text('Photos')),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: FutureBuilder<List<Users>?>(
