@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:project_api/model/users.dart';
 import 'package:project_api/service/api_service.dart';
+import 'package:project_api/ui/detail_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen(
@@ -96,6 +97,18 @@ class _MainScreenState extends State<MainScreen> {
                                           onPressed: () =>
                                               Navigator.pop(context, 'OK'),
                                           child: const Text('OK'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                              DetailScreen(user: snapshot.data![index]),
+                                              ),
+                                          ),
+                                          child: Text(
+                                            'Detail',
+                                          ),
                                         ),
                                       ],
                                     );
